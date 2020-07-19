@@ -1,8 +1,6 @@
 package com.example.SecuritySpringDataSpecifications.security;
 
 import com.example.SecuritySpringDataSpecifications.security.jwt.JwtAuthenticationConfiguration;
-import com.example.SecuritySpringDataSpecifications.security.jwt.JwtTokenFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
