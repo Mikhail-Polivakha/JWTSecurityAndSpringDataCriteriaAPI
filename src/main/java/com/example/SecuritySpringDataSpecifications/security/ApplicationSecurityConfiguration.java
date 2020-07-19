@@ -1,12 +1,17 @@
 package com.example.SecuritySpringDataSpecifications.security;
 
+import com.example.SecuritySpringDataSpecifications.security.jwt.JwtAuthenticationConfiguration;
+import com.example.SecuritySpringDataSpecifications.security.jwt.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,16 +26,26 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         return super.userDetailsServiceBean();
     }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers().permitAll()
-                .antMatchers().authenticated()
-                .antMatchers().hasRole("")
+                .antMatchers(HttpMethod.GET, "/home").permitAll()
+                .antMatchers(HttpMethod.GET, "/authOnly").authenticated()
+                .antMatchers(HttpMethod.GET, "/adminOnly").hasRole("ADMIN")
                 .and()
-                .formLogin();
+                .formLogin()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .apply(new JwtAuthenticationConfiguration());
     }
 
     @Override
