@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
-@Service
+@Service(value = "implementedServiceBean")
 @Slf4j
 public class UserDetailServiceImplementation implements UserDetailsService {
 

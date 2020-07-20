@@ -16,11 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
-@RequestMapping("/authentcaiton")
+@RequestMapping("/")
 public class AuthenticationController {
 
     @Autowired
@@ -32,7 +29,7 @@ public class AuthenticationController {
     @Autowired
     DAOUserServiceImlementation daoUserServiceImlementation;
 
-    @PostMapping()
+    @PostMapping("/authenticate")
     public ResponseEntity authenticateTheUser(@RequestBody AuthenticationRequest authenticationRequest)
             throws BadCredentialsException {
         try {

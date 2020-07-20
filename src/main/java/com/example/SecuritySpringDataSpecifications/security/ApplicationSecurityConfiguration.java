@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,11 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception {
-        return super.userDetailsServiceBean();
-    }
+
 
     @Bean
     @Override
@@ -35,9 +30,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/home").permitAll()
-                .antMatchers(HttpMethod.GET, "/authOnly").authenticated()
-                .antMatchers(HttpMethod.GET, "/adminOnly").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/main/home").permitAll()
+                .antMatchers(HttpMethod.GET, "/main/authOnly").authenticated()
+                .antMatchers(HttpMethod.GET, "/main/adminOnly").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .and()
