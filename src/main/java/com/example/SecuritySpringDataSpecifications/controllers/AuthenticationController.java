@@ -1,6 +1,6 @@
 package com.example.SecuritySpringDataSpecifications.controllers;
 
-import com.example.SecuritySpringDataSpecifications.Services.DAOUserServiceImlementation;
+import com.example.SecuritySpringDataSpecifications.repositories.UserServiceDAOImlementation;
 import com.example.SecuritySpringDataSpecifications.models.AuthenticationRequest;
 import com.example.SecuritySpringDataSpecifications.models.AuthenticationResponse;
 import com.example.SecuritySpringDataSpecifications.models.User;
@@ -27,7 +27,7 @@ public class AuthenticationController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    DAOUserServiceImlementation daoUserServiceImlementation;
+    UserServiceDAOImlementation daoUserServiceImlementation;
 
     @PostMapping("/authenticate")
     public ResponseEntity authenticateTheUser(@RequestBody AuthenticationRequest authenticationRequest)

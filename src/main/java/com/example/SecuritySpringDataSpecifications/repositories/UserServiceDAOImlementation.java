@@ -1,9 +1,7 @@
-package com.example.SecuritySpringDataSpecifications.Services;
+package com.example.SecuritySpringDataSpecifications.repositories;
 
 import com.example.SecuritySpringDataSpecifications.models.Role;
 import com.example.SecuritySpringDataSpecifications.models.User;
-import com.example.SecuritySpringDataSpecifications.repositories.RoleRepository;
-import com.example.SecuritySpringDataSpecifications.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +18,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class DAOUserServiceImlementation implements DAOUSerService {
+public class UserServiceDAOImlementation implements UserServiceDAO {
 
     @Autowired
     private UserRepository userRepository;
